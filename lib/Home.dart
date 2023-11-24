@@ -12,6 +12,14 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+  bool isDarkMode=false;
+
+  void toggleTheme(){
+    setState(() {
+      isDarkMode=!isDarkMode;
+    });
+  }
+
   List toDoList=[];
   String item='';
   TextEditingController textController=TextEditingController();
@@ -22,12 +30,24 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  // onFireAddItem(){
+  //   setState(() {
+  //     toDoList.add({'item': item});
+  //     textController.text.trim().isNotEmpty;
+  //     textController.clear();
+  //   });
+  // }
+
   onFireAddItem(){
     setState(() {
-      toDoList.add({'item': item});
-      textController.clear();
+      if(item.trim().isNotEmpty && !toDoList.any((element) => element['item'] == item)){
+        toDoList.add({'item':item});
+        textController.clear();
+      }
     });
   }
+
+
 
   toDoRomoveFunction(index){
     setState(() {
@@ -41,16 +61,23 @@ class _MyHomePageState extends State<MyHomePage> {
          SnackBar(content: Text(massege)));
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
         centerTitle: true,
+
+        leading: DrawerButton(onPressed: (){},),
+        actions: [
+          IconButton(onPressed: (){toggleTheme();},
+            icon: const Icon(Icons.light_mode)),
+        ],
       ),
       body: Container(
-        padding: EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
             Expanded(
@@ -96,8 +123,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               flex: 10,
                                 child: IconButton.filledTonal(
                                   iconSize:18,
-                                  color: Colors.black54,
-                                  icon: Icon(Icons.delete),
+                                  // color: Colors.black54,
+                                  icon: const Icon(Icons.delete),
                                   onPressed:(){
                                     toDoRomoveFunction(index);
                                   },
@@ -114,7 +141,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ),
-      )
+      ),
+        floatingActionButton: FloatingActionButton(
+        onPressed: toggleTheme,
+        tooltip: 'toggle theme',
+        child: const Icon(Icons.lightbulb),
+    ),
     );
   }
 }

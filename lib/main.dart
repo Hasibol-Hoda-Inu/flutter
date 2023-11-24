@@ -15,12 +15,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
+      themeMode: ThemeMode.system,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        brightness: Brightness.light,
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        // useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Basic To Do App'),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          backgroundColor: Colors.black54,
+          foregroundColor: Colors.white70,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.white24,
+      ),
+    )
+      ),
+      home: const MyHomePage(title: 'To Do'),
     );
   }
 }
