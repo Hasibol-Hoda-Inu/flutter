@@ -20,3 +20,19 @@ Future<bool> createProduct(FormValues) async {
   }
 }
 
+Future<List> getProductInfo() async {
+  var url=Uri.parse('https://crud.teamrabbil.com/api/v1/ReadProduct');
+  var getHeaders={'Content-Type':'application/json'};
+  var response=await http.get(url, headers: getHeaders);
+  var resultCode=response.statusCode;
+  var resultBody=jsonDecode(response.body);
+
+  if (resultCode==200 && resultBody['status']=='success'){
+    successToast('Request success');
+    return resultBody['data'];
+  }
+  else{
+    errorToast('Request failed try again');
+    return [''];
+  }
+}

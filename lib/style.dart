@@ -91,3 +91,14 @@ void successToast(msg){
       fontSize: 16.0
   );
 }
+
+//Product screen styles starts here
+
+SliverGridDelegateWithFixedCrossAxisCount productScreenGridView(){
+  return const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+    mainAxisSpacing: 15,
+    crossAxisSpacing: 5,
+    mainAxisExtent: 270,
+  );
+}
