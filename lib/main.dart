@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'ProductCreateScreen.dart';
 import 'ProductScreen.dart';
+import 'productUpdateScreen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'CRUD with rest API',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
       home: const ProductScreen(),

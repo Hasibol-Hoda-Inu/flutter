@@ -4,7 +4,11 @@ A new Flutter project.
 
 ## Getting Started
 
-This is a CRUD app
-Product create screen:
+This is a CRUD app. 
+
+### Product create screen:
 ![product screen](assets/images/pcs.png)
 
+### Product screen and popup
+![Product screen](assets/images/pscn.png)
+![popup](assets/images/pop.png)

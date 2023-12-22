@@ -65,7 +65,7 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
         children: [
           ScreenBackground(context),
           Container(
-            child: loading?(Center(child:LinearProgressIndicator())):(SingleChildScrollView(
+            child: loading?(Center(child:CircularProgressIndicator())):(SingleChildScrollView(
               padding: EdgeInsets.all(12.0),
               child: Column(
                 children: [

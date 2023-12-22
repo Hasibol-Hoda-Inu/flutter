@@ -36,3 +36,20 @@ Future<List> getProductInfo() async {
     return [''];
   }
 }
+
+Future<bool> deleteProduct(id) async {
+  var url=Uri.parse('https://crud.teamrabbil.com/api/v1/DeleteProduct/'+id);
+  var getHeader={'Content-Type':'application/json'};
+  var response= await http.get(url, headers: getHeader);
+  var resultCode=response.statusCode;
+  var resultBody=jsonDecode(response.body);
+
+  if(resultCode==200 && resultBody['status']=='success'){
+    successToast('Success');
+    return true;
+  }
+  else{
+    errorToast('Try again');
+    return false;
+  }
+}
