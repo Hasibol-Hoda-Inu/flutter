@@ -3,7 +3,8 @@ import 'restClient.dart';
 import 'style.dart';
 
 class productUpdateScreen extends StatefulWidget {
-  const productUpdateScreen({super.key});
+  final Map updateItem;
+  const productUpdateScreen(this.updateItem);
 
   @override
   State<productUpdateScreen> createState() => _productUpdateScreenState();
@@ -16,6 +17,18 @@ class _productUpdateScreenState extends State<productUpdateScreen> {
 
   // loading
   bool loading=false;
+
+  @override
+  void initState(){
+    setState(() {
+      FormValues.update('productName', (value) => widget.updateItem['productName']);
+      FormValues.update('productCode', (value) => widget.updateItem['productCode']);
+      FormValues.update('unitPrice', (value) => widget.updateItem['unitPrice']);
+      FormValues.update('totalPrice', (value) => widget.updateItem['totalPrice']);
+      FormValues.update('qty', (value) => widget.updateItem['qty']);
+      FormValues.update('img', (value) => widget.updateItem['img']);
+    });
+  }
 
   InputOnChange(key,textValue){
     setState(() {
@@ -46,7 +59,7 @@ class _productUpdateScreenState extends State<productUpdateScreen> {
       setState(() {
         loading =true;
       });
-      await createProduct(FormValues);
+      // await createProduct(FormValues);
       setState(() {
         loading = false;
       });
@@ -67,30 +80,38 @@ class _productUpdateScreenState extends State<productUpdateScreen> {
         children: [
           ScreenBackground(context),
           Container(
-              child: loading?(Center(child:CircularProgressIndicator())):(SingleChildScrollView(
-                padding: EdgeInsets.all(12.0),
+              child: loading?(const Center(child:CircularProgressIndicator())):(SingleChildScrollView(
+                padding: const EdgeInsets.all(12.0),
                 child: Column(
                   children: [
-                    TextFormField(onChanged: (textValue){
+                    TextFormField(
+                      initialValue:FormValues['productName'],
+                      onChanged: (textValue){
                       InputOnChange('productName', textValue);
                     },
                       decoration: AppInputDecoration('Product Name'),
                     ),
                     const SizedBox(height: 20,),
 
-                    TextFormField(onChanged: (textValue){
+                    TextFormField(
+                      initialValue: FormValues['productCode'],
+                      onChanged: (textValue){
                       InputOnChange('productCode', textValue);
                     },
                       decoration: AppInputDecoration('Product Code'),
                     ),
                     const SizedBox(height: 20,),
-                    TextFormField(onChanged: (textValue){
+                    TextFormField(
+                      initialValue: FormValues['unitPrice'],
+                      onChanged: (textValue){
                       InputOnChange('unitPrice', textValue);
                     },
                       decoration: AppInputDecoration("Unit Price"),
                     ),
                     const SizedBox(height: 20,),
-                    TextFormField(onChanged: (textValue){
+                    TextFormField(
+                      initialValue: FormValues['totalPrice'],
+                      onChanged: (textValue){
                       InputOnChange('totalPrice', textValue);
                     },
                       decoration: AppInputDecoration('Total Price'),
@@ -119,7 +140,9 @@ class _productUpdateScreenState extends State<productUpdateScreen> {
                       ),
                     ),
                     const SizedBox(height: 20,),
-                    TextFormField(onChanged: (textValue){
+                    TextFormField(
+                      initialValue: FormValues['img'],
+                      onChanged: (textValue){
                       InputOnChange('img', textValue);
                     },
                       decoration: AppInputDecoration('Product img url'),

@@ -55,8 +55,8 @@ class _ProductScreenState extends State<ProductScreen> {
     );
   }
 
-  gotoUpdatePage(){
-    Navigator.push(context, MaterialPageRoute(builder: (builder)=>productUpdateScreen()));
+  gotoUpdatePage(context, updateItem){
+    Navigator.push(context, MaterialPageRoute(builder: (builder)=>productUpdateScreen(updateItem)));
   }
 
   @override
@@ -95,7 +95,7 @@ class _ProductScreenState extends State<ProductScreen> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 IconButton.filledTonal(onPressed: (){
-                                  gotoUpdatePage();
+                                  gotoUpdatePage(context, ProductList[index]);
                                 },
                                   icon: const Icon(Icons.edit),),
                                 const SizedBox(width: 5,),
