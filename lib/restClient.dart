@@ -53,3 +53,21 @@ Future<bool> deleteProduct(id) async {
     return false;
   }
 }
+
+Future<bool> updateProduct(FormValues, id) async {
+  var url=Uri.parse('https://crud.teamrabbil.com/api/v1/UpdateProduct/'+id);
+  var postBody=jsonEncode(FormValues);
+  var postHeader={'Content-Type':'application/json'};
+  var response= await http.post(url, headers: postHeader, body:postBody,);
+  var resultCode=response.statusCode;
+  var resultBOdy=jsonDecode(response.body);
+
+  if(resultCode==200 && resultBOdy['status']=='success'){
+    successToast('request success');
+    return true;
+  }
+  else{
+    errorToast('request failed try again');
+    return false;
+  }
+}

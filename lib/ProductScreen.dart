@@ -13,7 +13,7 @@ class ProductScreen extends StatefulWidget {
 class _ProductScreenState extends State<ProductScreen> {
 
   List ProductList=[];
-  bool loading= true;
+  bool loading= false;
 
   @override
   void initState(){
@@ -30,7 +30,8 @@ class _ProductScreenState extends State<ProductScreen> {
     });
   }
 
-  deleteItem(id){
+  /// delete item popup starts here
+  deleteItem (id) {
     showDialog(context: context,
         builder: (BuildContext context){
           return AlertDialog(
@@ -64,6 +65,7 @@ class _ProductScreenState extends State<ProductScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product Screen'),
+        centerTitle: true,
         foregroundColor: Colors.white,
         backgroundColor: Colors.green,
       ),
@@ -71,7 +73,7 @@ class _ProductScreenState extends State<ProductScreen> {
         children: [
           ScreenBackground(context),
           Container(
-            child: loading?(Center(child: CircularProgressIndicator(),)):
+            child: loading?(const Center(child: CircularProgressIndicator(),)):
             RefreshIndicator(
                 child: GridView.builder(
                 gridDelegate: productScreenGridView(),
@@ -88,9 +90,9 @@ class _ProductScreenState extends State<ProductScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(ProductList[index]['ProductName'],
-                              style: TextStyle(fontSize: 16),),
-                            SizedBox(height: 6,),
-                            Text('Price:'+ProductList[index]['UnitPrice']+'BDT'),
+                              style: const TextStyle(fontSize: 16),),
+                            const SizedBox(height: 6,),
+                            Text('Price: '+ProductList[index]['UnitPrice']+' ৳'),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [

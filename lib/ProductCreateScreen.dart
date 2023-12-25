@@ -11,7 +11,7 @@ class ProductCreateScreen extends StatefulWidget {
 
 class _ProductCreateScreenState extends State<ProductCreateScreen> {
 
-  Map <String, String> FormValues={'img':'','productCode':'','productName':'','qty':'','unitPrice':'', 'totalPrice':'',};
+  Map <String, String> FormValues={'Img':'','ProductName':'','ProductCode':'','Qty':'','UnitPrice':'', 'TotalPrice':'',};
 
   // loading
   bool loading=false;
@@ -23,22 +23,22 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
   }
 
   formOnSubmision() async {
-    if(FormValues['productName']!.isEmpty){
+    if(FormValues['ProductName']!.isEmpty){
       errorToast('Please input product name');
     }
-    else if (FormValues['productCode']!.isEmpty){
+    else if (FormValues['ProductCode']!.isEmpty){
       errorToast('Please input product code');
     }
-    else if (FormValues['unitPrice']!.isEmpty){
+    else if (FormValues['UnitPrice']!.isEmpty){
       errorToast('Please input unit price');
     }
-    else if (FormValues['totalPrice']!.isEmpty){
+    else if (FormValues['TotalPrice']!.isEmpty){
       errorToast('Please input total price');
     }
-    else if (FormValues['qty']!.isEmpty){
+    else if (FormValues['Qty']!.isEmpty){
       errorToast('Please input qty');
     }
-    else if (FormValues['img']!.isEmpty){
+    else if (FormValues['Img']!.isEmpty){
       errorToast('Please input img url');
     }
     else {
@@ -65,60 +65,60 @@ class _ProductCreateScreenState extends State<ProductCreateScreen> {
         children: [
           ScreenBackground(context),
           Container(
-            child: loading?(Center(child:CircularProgressIndicator())):(SingleChildScrollView(
-              padding: EdgeInsets.all(12.0),
+            child: loading?(const Center(child:CircularProgressIndicator())):(SingleChildScrollView(
+              padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
                   TextFormField(onChanged: (textValue){
-                    InputOnChange('productName', textValue);
+                    InputOnChange('ProductName', textValue);
                   },
                     decoration: AppInputDecoration('Product Name'),
                   ),
                   const SizedBox(height: 20,),
 
                   TextFormField(onChanged: (textValue){
-                    InputOnChange('productCode', textValue);
+                    InputOnChange('ProductCode', textValue);
                   },
                     decoration: AppInputDecoration('Product Code'),
                   ),
                   const SizedBox(height: 20,),
                   TextFormField(onChanged: (textValue){
-                    InputOnChange('unitPrice', textValue);
+                    InputOnChange('UnitPrice', textValue);
                   },
                     decoration: AppInputDecoration("Unit Price"),
                   ),
                   const SizedBox(height: 20,),
                   TextFormField(onChanged: (textValue){
-                    InputOnChange('totalPrice', textValue);
+                    InputOnChange('TotalPrice', textValue);
                   },
                     decoration: AppInputDecoration('Total Price'),
                   ),
 
-                  SizedBox(height: 20,),
+                  const SizedBox(height: 20,),
 
                   DropDownMenuStyle(
                     DropdownButton(
-                      value:FormValues['qty'],
+                      value:FormValues['Qty'],
                       items: [
-                        DropdownMenuItem(child: Text('Product qty'), value:'',),
-                        DropdownMenuItem(child: Text('1 pcs'), value:'1',),
-                        DropdownMenuItem(child: Text('2 pcs'), value: '2',),
-                        DropdownMenuItem(child: Text('3 pcs'), value: '3',),
-                        DropdownMenuItem(child: Text('4 pcs'), value: '4',),
-                        DropdownMenuItem(child: Text('5 pcs'), value: '5',),
-                        DropdownMenuItem(child: Text('6 pcs'), value: '6',),
-                        DropdownMenuItem(child: Text('7 pcs'), value: '7',),
+                        DropdownMenuItem(child: Text('Product qty'), value:''),
+                        DropdownMenuItem(child: Text('1 Pice'), value:'1 Pice',),
+                        DropdownMenuItem(child: Text('2 Pice'), value: '2 Pice',),
+                        DropdownMenuItem(child: Text('3 Pice'), value: '3 Pice',),
+                        DropdownMenuItem(child: Text('4 Pice'), value: '4 Pice',),
+                        DropdownMenuItem(child: Text('5 Pice'), value: '5 Pice',),
+                        DropdownMenuItem(child: Text('6 Pice'), value: '6 Pice',),
+                        DropdownMenuItem(child: Text('7 Pice'), value: '7 Pice',),
                       ],
                       onChanged: (textValue){
-                        InputOnChange('qty', textValue);
+                        InputOnChange('Qty', textValue);
                       },
-                      isExpanded:true,
                       underline: Container(),
+                      isExpanded:true,
                     ),
                   ),
                   const SizedBox(height: 20,),
                   TextFormField(onChanged: (textValue){
-                    InputOnChange('img', textValue);
+                    InputOnChange('Img', textValue);
                   },
                     decoration: AppInputDecoration('Product img url'),
                   ),
