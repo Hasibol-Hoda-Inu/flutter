@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager_with_rest_api/screen/onboarding/setPasswordScreen.dart';
+import 'package:task_manager_with_rest_api/screen/task/newTaskScreen.dart';
 
 import 'screen/onboarding/loginScreen.dart';
 import 'screen/onboarding/registrationScreen.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Task Manager',
-      initialRoute: '/emailVarification',
+      initialRoute: '/login',
       routes: {
         '/':(context)=> const splashScreen(),
         '/login':(context)=> const loginScreen(),
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/emailVarification':(context)=> const emailVarificationScreen(),
         '/pinVarification':(context)=> const pinVarificationScreen(),
         '/setPassword':(context)=> const setPasswordScreen(),
+        'newTaskScreen':(context)=> const taskScreen(),
 
       },
     );

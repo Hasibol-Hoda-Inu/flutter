@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../api/apiClient.dart';
 import '../../style/style.dart';
+import '../task/newTaskScreen.dart';
 
 class loginScreen extends StatefulWidget {
   const loginScreen({super.key});
@@ -10,40 +12,85 @@ class loginScreen extends StatefulWidget {
 }
 
 class _loginScreenState extends State<loginScreen> {
+
+  Map <String, String> formValues={'email':'', 'password':'',};
+
+  bool loading=false;
+  
+  inputOnChange(key, textValue){
+    setState(() {
+      formValues.update(key, (value) => textValue);
+    });
+  }
+
+  formOnSubmission()async{
+    if(formValues['email']!.isEmpty){
+      errorToast('write your email address');
+    }
+    else if(formValues['password']!.isEmpty){
+      errorToast('give a password');
+    }
+    else{
+      setState(() {
+        loading= true;
+      });
+     bool res= await login(formValues);
+     if(res==true){
+       // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>taskScreen()), (Route route) => false);
+     }
+     else{
+       setState(() {
+         loading= false;
+       });
+     }
+    }
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
           children: [
             ScreenBackGround(context),
-            Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Get started with', style: headText1(colorDarkBlue),),
-                  const SizedBox(height: 20,),
-                  TextFormField(
-                    initialValue: '',
-                    decoration: appInputDecoration('Email Address'),
-                  ),
-                  const SizedBox(height: 20,),
-                  TextFormField(decoration: appInputDecoration("Password"),
-                  keyboardType: TextInputType.phone,
-                  ),
-                  const SizedBox(height: 20,),
-                  Container(
-                    child: ElevatedButton(
-                      onPressed: (){},
-                      style: appButtonStyle(),
-                      child: successButton('Login', String),
+            Container(
+                child: loading?(const Center(child: CircularProgressIndicator())):(SingleChildScrollView(
+                  padding: const EdgeInsets.all(30.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Get started with', style: headText1(colorDarkBlue),),
+                      const SizedBox(height: 20,),
+                      TextFormField(
+                        onChanged: (textValue){
+                          inputOnChange('email', textValue);
+                        },
+                        decoration: appInputDecoration('Email Address'),
 
-                    ),
-                  )
-                ],
-              ),
-            )
+                      ),
+                      const SizedBox(height: 20,),
+                      TextFormField(
+                        onChanged: (textValue){
+                          inputOnChange('password', textValue);
+                        },
+                        decoration: appInputDecoration("Password"),
+                        keyboardType: TextInputType.visiblePassword,
+                      ),
+                      const SizedBox(height: 20,),
+                      ElevatedButton(
+                        onPressed: (){
+                          formOnSubmission();
+                        },
+                        style: appButtonStyle(),
+                        child: successButton('Login', String),
+
+                      )
+                    ],
+                  ),
+
+            )))
           ],
       ),
     );

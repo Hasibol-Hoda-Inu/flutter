@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 
 const colorRed= Color.fromRGBO(231,28,36,1);
 const colorDark= Color.fromRGBO(136,28,32,1);
@@ -68,7 +69,7 @@ DecoratedBox appDropdownStyle(child){
 
 SvgPicture ScreenBackGround(context){
   return SvgPicture.asset(
-    'assets/images/bg.svg',
+    'assets/images/bgnew.svg',
     fit: BoxFit.cover,
     alignment: Alignment.center,
     height: MediaQuery.of(context).size.height,
@@ -119,5 +120,27 @@ void errorToast(msg){
       backgroundColor: Colors.red,
       textColor: Colors.white,
       fontSize: 16.0
+  );
+}
+
+PinTheme OTPboxStyle(){
+  return PinTheme(
+    shape: PinCodeFieldShape.box,
+    borderRadius: BorderRadius.circular(5),
+    fieldHeight: 50,
+    fieldWidth: 45,
+
+    inactiveFillColor: Colors.transparent,
+    inactiveColor: colorLightGray,
+    inactiveBorderWidth: 0.5,
+
+    activeFillColor: Colors.transparent,
+    activeColor: colorGreen,
+    activeBorderWidth: 0.5,
+
+    errorBorderColor: colorRed,
+    errorBorderWidth: 0.5,
+
+    selectedFillColor: Colors.transparent,
   );
 }
