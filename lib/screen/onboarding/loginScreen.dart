@@ -34,9 +34,9 @@ class _loginScreenState extends State<loginScreen> {
       setState(() {
         loading= true;
       });
-     bool res= await login(formValues);
+     bool res= await loginRequest(formValues);
      if(res==true){
-       // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>taskScreen()), (Route route) => false);
+       Navigator.pushNamedAndRemoveUntil(context, '/newTaskScreen', (route) => false);
      }
      else{
        setState(() {
@@ -55,6 +55,7 @@ class _loginScreenState extends State<loginScreen> {
           children: [
             ScreenBackGround(context),
             Container(
+              alignment: Alignment.center,
                 child: loading?(const Center(child: CircularProgressIndicator())):(SingleChildScrollView(
                   padding: const EdgeInsets.all(30.0),
                   child: Column(
@@ -68,7 +69,7 @@ class _loginScreenState extends State<loginScreen> {
                           inputOnChange('email', textValue);
                         },
                         decoration: appInputDecoration('Email Address'),
-
+                        keyboardType: TextInputType.emailAddress,
                       ),
                       const SizedBox(height: 20,),
                       TextFormField(
@@ -76,7 +77,6 @@ class _loginScreenState extends State<loginScreen> {
                           inputOnChange('password', textValue);
                         },
                         decoration: appInputDecoration("Password"),
-                        keyboardType: TextInputType.visiblePassword,
                       ),
                       const SizedBox(height: 20,),
                       ElevatedButton(

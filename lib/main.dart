@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         '/emailVarification':(context)=> const emailVarificationScreen(),
         '/pinVarification':(context)=> const pinVarificationScreen(),
         '/setPassword':(context)=> const setPasswordScreen(),
-        'newTaskScreen':(context)=> const taskScreen(),
+        '/newTaskScreen':(context)=> const taskScreen(),
 
       },
     );
