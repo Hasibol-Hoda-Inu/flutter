@@ -86,6 +86,34 @@ class _loginScreenState extends State<loginScreen> {
                         style: appButtonStyle(),
                         child: successButton('Login', String),
 
+                      ),
+                      const SizedBox(height: 60,),
+                      Container(
+                        alignment: Alignment.center,
+                        child: Column(
+                          children: [
+                            InkWell(
+                              onTap: (){
+                                Navigator.pushNamed(context, '/emailVarification');
+                              },
+                              child: Text('Forget password?', style: headText6(colorLightGray),),
+                            ),
+                            const SizedBox(height: 15,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text("Don't have an account?"),
+                                const SizedBox(width: 5,),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.pushNamed(context, '/registration');
+                                  },
+                                  child: const Text('Sign up', style: TextStyle(color: colorGreen),),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),
