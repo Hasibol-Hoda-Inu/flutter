@@ -11,7 +11,7 @@ class registrationScreen extends StatefulWidget {
 
 class _registrationScreenState extends State<registrationScreen> {
 
-  Map <String, String>formValues={'email':'','firstName':'','lastName':'','mobile':'','password':'','photo':''};
+  Map <String, String>formValues={'email':'','firstName':'','lastName':'','mobile':'','password':'','photo':'', 'cpassword':'',};
 
   bool loading =false;
 
@@ -37,14 +37,21 @@ class _registrationScreenState extends State<registrationScreen> {
   else if (formValues['password']!.isEmpty){
     errorToast('give a strong password');
   }
+  else if(formValues['password']!=formValues['cpassword']){
+    errorToast('Password should be same');
+  }
   else {
     setState(() {
       loading=true;
     });
-    await registrationRequest(formValues);
-    setState(() {
-      loading=false;
-    });
+    bool res= await registrationRequest(formValues);
+    if( res==true){
+      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+    }else{
+      setState(() {
+        loading=false;
+      });
+    }
   }
 }
 
@@ -96,13 +103,35 @@ class _registrationScreenState extends State<registrationScreen> {
                      },
                      decoration: appInputDecoration('Password'),),
                    const SizedBox(height: 20,),
+                   TextFormField(
+                     onChanged: (textValue){
+                       inputOnchange('cpassword', textValue);
+                     },
+                     decoration: appInputDecoration('Confirm Password'),),
+                   const SizedBox(height: 20,),
                    ElevatedButton(
                      onPressed: (){
                        formOnsubmission();
                      },
                      style: appButtonStyle(),
                      child: successButton('Register', String),
-
+                   ),
+                   const SizedBox(height: 60,),
+                   Container(
+                     alignment: Alignment.center,
+                     child: Row(
+                       mainAxisAlignment: MainAxisAlignment.center,
+                       children: [
+                         const Text('Have an account? ',style: TextStyle(color: colorLightGray),),
+                         // const SizedBox(width: 5),
+                         InkWell(
+                           onTap: (){
+                             Navigator.pushNamed(context, '/login');
+                           },
+                           child: const Text('Sign in', style: TextStyle(color: colorGreen),),
+                         )
+                       ],
+                     ),
                    )
                  ],
                ),

@@ -48,7 +48,6 @@ loginRequest(formValues)async{
  }
  }
 
-
  registrationRequest (formValues)async{
   try{
     var url=Uri.parse('${baseUrl}/registration');
@@ -81,6 +80,7 @@ Future<bool> verifyEmail(email)async{
 
   if(resultCode==200 && resultBody['status']=='success'){
     successToast('success');
+    await writeEmailVerification(email);
     return true;
   }
   else{
@@ -89,14 +89,15 @@ Future<bool> verifyEmail(email)async{
   }
 }
 
-Future<bool> verifyOTP(email, code)async{
-  var url=Uri.parse('$baseUrl/RecoverVerifyOTP/$email/$code');
+Future<bool> verifyOTP(email, OTP)async{
+  var url=Uri.parse('$baseUrl/RecoverVerifyOTP/$email/$OTP');
   var response= await http.get(url, headers: postHeader);
   var resultCode= response.statusCode;
   var resultBody= jsonDecode(response.body);
 
   if(resultCode==200 && resultBody['status']=='success'){
     successToast('Success');
+    await writeOTPVerification(OTP);
     return true;
   }
   else{

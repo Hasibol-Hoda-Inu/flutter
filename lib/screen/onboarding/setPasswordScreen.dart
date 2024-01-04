@@ -34,6 +34,23 @@ class _setPasswordScreenState extends State<setPasswordScreen> {
                     style: appButtonStyle(),
                     onPressed: (){}, 
                     child: successButton('Confirm', String),
+                ),
+                const SizedBox(height: 60,),
+                Container(
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('Have an account? ',style: TextStyle(color: colorLightGray),),
+                      // const SizedBox(width: 5),
+                      InkWell(
+                        onTap: (){
+                          Navigator.pushNamed(context, '/login');
+                        },
+                        child: const Text('Sign in', style: TextStyle(color: colorGreen),),
+                      )
+                    ],
+                  ),
                 )
               ],
             ),

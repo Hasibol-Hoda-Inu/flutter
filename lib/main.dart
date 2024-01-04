@@ -12,6 +12,7 @@ import 'screen/onboarding/emailVarificationScreen.dart';
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   String? token= await readUserData('token');
+
   if(token==null){
     runApp(const MyApp('/login'));
   }else{
