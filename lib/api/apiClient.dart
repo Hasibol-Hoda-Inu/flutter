@@ -8,20 +8,21 @@ import '../style/style.dart';
 var baseUrl='https://task.teamrabbil.com/api/v1';
 var postHeader={'Content-Type':'application/json'};
 
-Future<bool> createTask(task) async {
-  var url=Uri.parse('$baseUrl/createTask');
-  var postBody =jsonEncode(task);
-  var response= await http.post(url, headers: postHeader, body: postBody);
+Future<List> listofTaskRequest(status) async {
+  var url=Uri.parse('$baseUrl/listTaskByStatus/$status');
+  String? token= await readUserData('token');
+  var headerWithToken={'Content-Type':'application/json', 'token':'$token'};
+  var response= await http.post(url, headers: headerWithToken, );
   var resultCode= response.statusCode;
   var resultBody= jsonDecode(response.body);
 
   if(resultCode==200 && resultBody['status']=='success'){
     successToast('success');
-    return true;
+    return resultBody['data'];
   }
   else{
     errorToast('Try again');
-    return false;
+    return [];
   }
 }
 

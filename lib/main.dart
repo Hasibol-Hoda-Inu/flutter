@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:task_manager_with_rest_api/screen/onboarding/setPasswordScreen.dart';
+import 'package:task_manager_with_rest_api/screen/task/homeScreen.dart';
 import 'package:task_manager_with_rest_api/screen/task/newTaskScreen.dart';
 import 'package:task_manager_with_rest_api/utility/utility.dart';
 
@@ -16,7 +17,7 @@ void main() async{
   if(token==null){
     runApp(const MyApp('/login'));
   }else{
-    runApp(const MyApp('/newTaskScreen'));
+    runApp(const MyApp('/'));
   }
   
 }
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       title: 'Task Manager',
       initialRoute: firstRoute,
       routes: {
-        '/':(context)=> const splashScreen(),
+        '/':(context)=> const homeScreen(),
         '/login':(context)=> const loginScreen(),
         '/registration':(context)=> const registrationScreen(),
         '/emailVarification':(context)=> const emailVarificationScreen(),
