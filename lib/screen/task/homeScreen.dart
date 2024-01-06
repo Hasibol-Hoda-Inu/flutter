@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager_with_rest_api/style/style.dart';
 
 import '../../ component/appBottomNav.dart';
 import '../../ component/canceledTaskList.dart';
 import '../../ component/completedTaskList.dart';
 import '../../ component/newTaskList.dart';
 import '../../ component/onProgressTaskList.dart';
+import '../../ component/taskAppBar.dart';
+import '../../utility/defaultProfileImg.dart';
+import '../../utility/utility.dart';
 
 class homeScreen extends StatefulWidget {
   const homeScreen({super.key});
@@ -16,6 +18,14 @@ class homeScreen extends StatefulWidget {
 
 class _homeScreenState extends State<homeScreen> {
 
+  Map <String, String> appBarUserData= {
+    'email': '',
+    'firstName': '',
+    'lastName': '',
+    'mobile': '',
+    'photo': 'userDefaultPic'
+  };
+
   int bottomNavbarItemIndex=0;
 
   navOnTab(int index){
@@ -25,20 +35,48 @@ class _homeScreenState extends State<homeScreen> {
   }
 
   final widgetOptions=[
-    newTaskList(),
-    completedTaskList(),
-    canceledTaskList(),
-    onPregressTaskList(),
+    const newTaskList(),
+    const completedTaskList(),
+    const canceledTaskList(),
+    const onPregressTaskList(),
   ];
+
+  @override
+  initState(){
+    readAppBarUserData();
+    super.initState();
+  }
+  readAppBarUserData() async {
+    String? email= await readUserData('email');
+    String? firstName= await readUserData('firstName');
+    String? lastName= await readUserData('lastName');
+    String? mobile= await readUserData('mobile');
+    String? photo= await readUserData('photo');
+    setState(() {
+      appBarUserData={
+        'email': '$email',
+        'firstName': '$firstName',
+        'lastName': '$lastName',
+        'mobile': '$mobile',
+        'photo': "$photo"
+      };
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('homeScreen',style: TextStyle(color: colorWhite),),
-        backgroundColor: colorGreen,
-      ),
+      appBar: taskAppBar(context,appBarUserData),
       body: widgetOptions.elementAt(bottomNavbarItemIndex),
+      floatingActionButton: FloatingActionButton(
+          onPressed: (){
+
+          },
+          child: IconButton.filledTonal(
+              onPressed: (){},
+              icon: Icon(Icons.add)
+          ),
+      ),
       bottomNavigationBar: bottomNav(bottomNavbarItemIndex, navOnTab),
     );
   }

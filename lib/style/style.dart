@@ -13,6 +13,15 @@ const colorDarkBlue= Color.fromRGBO(44,62,80,1);
 const colorLightGray= Color.fromRGBO(135,142,150,1);
 const colorLight= Color.fromRGBO(211,211,211,1);
 
+SizedBox taskCardsStyle(child){
+  return SizedBox(
+    width: double.infinity,
+    child: Container(
+      padding: EdgeInsets.all(12.0),
+      child: child,
+    ),
+  );
+}
 TextStyle headText1(textColor){
   return TextStyle(
     fontSize: 28,
