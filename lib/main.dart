@@ -9,6 +9,7 @@ import 'screen/onboarding/registrationScreen.dart';
 import 'screen/onboarding/splashScreen.dart';
 import 'screen/onboarding/pinVarificationScreen.dart';
 import 'screen/onboarding/emailVarificationScreen.dart';
+import 'screen/task/taskCreateScreen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,6 +39,7 @@ class MyApp extends StatelessWidget {
         '/pinVarification':(context)=> const pinVarificationScreen(),
         '/setPassword':(context)=> const setPasswordScreen(),
         '/newTaskScreen':(context)=> const taskScreen(),
+        '/taskCreateScreen':(context)=> const taskCreateScreen(),
 
       },
     );

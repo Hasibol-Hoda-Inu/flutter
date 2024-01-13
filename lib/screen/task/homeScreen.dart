@@ -70,11 +70,11 @@ class _homeScreenState extends State<homeScreen> {
       body: widgetOptions.elementAt(bottomNavbarItemIndex),
       floatingActionButton: FloatingActionButton(
           onPressed: (){
-
+            Navigator.pushNamed(context, '/taskCreateScreen');
           },
           child: IconButton.filledTonal(
               onPressed: (){},
-              icon: Icon(Icons.add)
+              icon: const Icon(Icons.add)
           ),
       ),
       bottomNavigationBar: bottomNav(bottomNavbarItemIndex, navOnTab),
