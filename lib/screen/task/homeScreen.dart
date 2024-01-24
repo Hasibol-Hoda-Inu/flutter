@@ -6,7 +6,6 @@ import '../../ component/completedTaskList.dart';
 import '../../ component/newTaskList.dart';
 import '../../ component/onProgressTaskList.dart';
 import '../../ component/taskAppBar.dart';
-import '../../utility/defaultProfileImg.dart';
 import '../../utility/utility.dart';
 
 class homeScreen extends StatefulWidget {

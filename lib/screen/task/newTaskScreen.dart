@@ -15,18 +15,15 @@ class _taskScreenState extends State<taskScreen> {
       body: Stack(
         children: [
           ScreenBackGround(context),
-          Container(
-            child: Padding(
-              padding: const EdgeInsets.all(30.0),
-              child: Column(
-                children: [
-                  ListTile(
-                    title: Text('testing'),
-                    subtitle: Text('waiting to connect'),
-
-                  )
-                ],
-              ),
+          const Padding(
+            padding: EdgeInsets.all(30.0),
+            child: Column(
+              children: [
+                ListTile(
+                  title: Text('testing'),
+                  subtitle: Text('waiting to connect'),
+                )
+              ],
             ),
           )
         ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager_with_rest_api/screen/task/homeScreen.dart';
 import 'package:task_manager_with_rest_api/style/style.dart';
 
 import '../../api/apiClient.dart';
@@ -38,7 +37,7 @@ class _taskCreateScreenState extends State<taskCreateScreen> {
       setState(() {
         loading=true;
       });
-      bool res= await createNewTaskRequest();
+      bool res= await createNewTaskRequest(formValues);
       if(res==true){
         Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
       }
@@ -86,7 +85,9 @@ class _taskCreateScreenState extends State<taskCreateScreen> {
                   ),
                   const SizedBox(height: 20,),
                   ElevatedButton(
-                      onPressed: (){}, 
+                      onPressed: (){
+                        formOnSubmission();
+                      },
                       child: const Text('send'),
                   )
                 ],

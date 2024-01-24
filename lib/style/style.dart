@@ -17,7 +17,7 @@ SizedBox taskCardsStyle(child){
   return SizedBox(
     width: double.infinity,
     child: Container(
-      padding: EdgeInsets.all(12.0),
+      padding: const EdgeInsets.all(12.0),
       child: child,
     ),
   );
@@ -151,5 +151,20 @@ PinTheme OTPboxStyle(){
     errorBorderWidth: 0.5,
 
     selectedFillColor: Colors.transparent,
+  );
+}
+
+//LIST VEW STYLE
+
+Container statusChild(statusText,statusColor){
+  return Container(
+    alignment: Alignment.center,
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      color: statusColor,
+    ),
+    height: 20,
+    width: 60,
+    child: Text(statusText, style: TextStyle(color: colorWhite, fontSize: 10, fontWeight: FontWeight.w400),),
   );
 }

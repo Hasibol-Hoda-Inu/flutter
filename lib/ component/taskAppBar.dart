@@ -7,7 +7,7 @@ AppBar taskAppBar(context,appBarUserData){
   return AppBar(
     backgroundColor: colorGreen,
     flexibleSpace: Container(
-      margin: EdgeInsets.fromLTRB(10, 40, 10, 10),
+      margin: const EdgeInsets.fromLTRB(10, 40, 10, 10),
       child: Row(
         children: [
           CircleAvatar(
@@ -28,5 +28,14 @@ AppBar taskAppBar(context,appBarUserData){
         ],
       ),
     ),
+    actions: [
+      IconButton(
+          onPressed: ()async{
+            await removeToken();
+            Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+          },
+          icon: const Icon(Icons.logout),
+      )
+    ],
   );
 }

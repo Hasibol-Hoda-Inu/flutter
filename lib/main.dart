@@ -6,7 +6,6 @@ import 'package:task_manager_with_rest_api/utility/utility.dart';
 
 import 'screen/onboarding/loginScreen.dart';
 import 'screen/onboarding/registrationScreen.dart';
-import 'screen/onboarding/splashScreen.dart';
 import 'screen/onboarding/pinVarificationScreen.dart';
 import 'screen/onboarding/emailVarificationScreen.dart';
 import 'screen/task/taskCreateScreen.dart';
@@ -40,7 +39,6 @@ class MyApp extends StatelessWidget {
         '/setPassword':(context)=> const setPasswordScreen(),
         '/newTaskScreen':(context)=> const taskScreen(),
         '/taskCreateScreen':(context)=> const taskCreateScreen(),
-
       },
     );
   }

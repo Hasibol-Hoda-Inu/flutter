@@ -8,25 +8,58 @@ import '../style/style.dart';
 var baseUrl='https://task.teamrabbil.com/api/v1';
 var postHeader={'Content-Type':'application/json'};
 
-createNewTaskRequest()async{
-  try{
-    var url=Uri.parse('$baseUrl/createTask');
-    String? token= await readUserData('token');
-    var headerWithToken={'Content-Type':'application/json','token':'$token'};
-    var response= await http.get(url, headers: headerWithToken);
-    var resultCode= response.statusCode;
-    var resultBody= jsonDecode(response.body);
+Future<bool> createNewTaskRequest(taskList)async{
+  var url=Uri.parse('$baseUrl/createTask');
+  String? token= await readUserData('token');
+  var headerWithToken={'Content-Type':'application/json','token':'$token'};
+  var postBody = jsonEncode(taskList);
+  var response= await http.post(url,body: postBody, headers: headerWithToken);
+  var resultCode= response.statusCode;
+  var resultBody= jsonDecode(response.body);
 
-    if(resultCode==200 && resultBody['status']=='success'){
-      successToast('success');
-      return true;
-    }
-    else{
-      errorToast('Try again');
-      return false;
-    }
-  }catch(error){
-    errorToast('an error occurred $error');
+  if(resultCode==200 && resultBody['status']=='success'){
+    successToast('success');
+    return true;
+  }
+  else{
+    errorToast('Try again');
+    return false;
+  }
+}
+
+Future<bool> taskDeleteRequest(id)async{
+  var url=Uri.parse('$baseUrl/deleteTask/$id');
+  String? token= await readUserData('token');
+  var headerWithToken={'Content-Type':'application/json','token':'$token'};
+  var response= await http.get(url, headers: headerWithToken);
+  var resultCode= response.statusCode;
+  var resultBody= jsonDecode(response.body);
+
+  if(resultCode==200 && resultBody['status']=='success'){
+    successToast('success');
+    return true;
+  }
+  else{
+    errorToast('Try again');
+    return false;
+  }
+}
+
+Future<bool> taskUpdateRequest(id,status)async{
+  var url=Uri.parse('$baseUrl/updateTaskStatus/$id/$status');
+  String? token= await readUserData('token');
+  var headerWithToken={'Content-Type':'application/json','token':'$token'};
+  var response= await http.get(url, headers: headerWithToken);
+  var resultCode= response.statusCode;
+  var resultBody= jsonDecode(response.body);
+
+  if(resultCode==200 && resultBody['status']=='success'){
+    successToast('success');
+    return true;
+  }
+  else{
+    errorToast('Try again');
+    return false;
   }
 }
 
