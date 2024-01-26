@@ -3,7 +3,7 @@ import 'package:task_manager_with_rest_api/style/style.dart';
 
 import '../utility/utility.dart';
 
-AppBar taskAppBar(context,appBarUserData){
+AppBar taskAppBar(context, appBarUserData) {
   return AppBar(
     backgroundColor: colorGreen,
     flexibleSpace: Container(
@@ -21,8 +21,8 @@ AppBar taskAppBar(context,appBarUserData){
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("${appBarUserData['firstName']}${appBarUserData['lastName']}"),
-              Text("$appBarUserData['email']"),
+              Text("${appBarUserData['firstName']} ${appBarUserData['lastName']}",style: const TextStyle(color: colorWhite),), // Fix here
+              Text("${appBarUserData['email']}", style: const TextStyle(color: colorWhite),), // Fix here
             ],
           )
         ],
@@ -30,11 +30,11 @@ AppBar taskAppBar(context,appBarUserData){
     ),
     actions: [
       IconButton(
-          onPressed: ()async{
-            await removeToken();
-            Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
-          },
-          icon: const Icon(Icons.logout),
+        onPressed: () async {
+          await removeToken();
+          Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+        },
+        icon: const Icon(Icons.logout, color: colorWhite,),
       )
     ],
   );

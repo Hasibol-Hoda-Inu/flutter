@@ -68,14 +68,12 @@ class _homeScreenState extends State<homeScreen> {
       appBar: taskAppBar(context,appBarUserData),
       body: widgetOptions.elementAt(bottomNavbarItemIndex),
       floatingActionButton: FloatingActionButton(
-          onPressed: (){
-            Navigator.pushNamed(context, '/taskCreateScreen');
-          },
-          child: IconButton.filledTonal(
-              onPressed: (){},
-              icon: const Icon(Icons.add)
-          ),
+        onPressed: () {
+          Navigator.pushNamed(context, '/taskCreateScreen');
+        },
+        child: const Icon(Icons.add),
       ),
+
       bottomNavigationBar: bottomNav(bottomNavbarItemIndex, navOnTab),
     );
   }

@@ -20,6 +20,7 @@ ListView taskListView(taskList, taskDeletePopup, statusChange){
       return Card(
         child: taskCardsStyle(
          Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
            children: [
              Text(taskList[index]['title'], style: headText1(colorDarkBlue),),
              Text(taskList[index]['description'], style: headText6(colorLightGray),),
@@ -31,21 +32,22 @@ ListView taskListView(taskList, taskDeletePopup, statusChange){
                  Container(
                    child: Row(
                      children: [
-                       SizedBox(width: 50,height: 30,
-                         child:
-                         ElevatedButton(onPressed: (){
-                           statusChange(taskList[index]['_id']);
-                         },child: Icon(Icons.edit_location_outlined),
+                       SizedBox(
+                         child: IconButton.filledTonal(
+                           onPressed: () {
+                             statusChange(taskList[index]['_id']);
+                           },
+                           icon: const Icon(Icons.edit_location_outlined),
                          ),
                        ),
-                       const SizedBox(width: 20,),
-                       SizedBox(width: 50,height: 30,
-                         child: ElevatedButton(onPressed:(){
+                       SizedBox(
+                         child: IconButton.filledTonal(
+                           onPressed:(){
                            taskDeletePopup(taskList[index]['_id']);
                          },
-                           child: Icon(Icons.delete_outline),
+                           icon: const Icon(Icons.delete_outline),
                        ),
-                       )
+                       ),
                      ],
                    ),
                  )

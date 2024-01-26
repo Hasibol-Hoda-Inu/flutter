@@ -64,9 +64,9 @@ class _taskCreateScreenState extends State<taskCreateScreen> {
               padding: const EdgeInsets.all(32.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('data',style: headText1(colorDarkBlue),),
+                  Text('Create your task',style: headText1(colorDarkBlue),),
                   const SizedBox(height: 20,),
                   TextFormField(
                     onChanged: (textValue){
@@ -85,10 +85,11 @@ class _taskCreateScreenState extends State<taskCreateScreen> {
                   ),
                   const SizedBox(height: 20,),
                   ElevatedButton(
+                      style: appButtonStyle(),
                       onPressed: (){
                         formOnSubmission();
                       },
-                      child: const Text('send'),
+                      child: successButton('Create', String),
                   )
                 ],
               ),

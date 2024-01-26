@@ -56,8 +56,8 @@ class _newTaskListState extends State<newTaskList> {
       return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState){
             return Container(
-              padding: EdgeInsets.all(30),
-              height: 360,
+              padding:  const EdgeInsets.all(30),
+              height: 460,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -75,6 +75,7 @@ class _newTaskListState extends State<newTaskList> {
                   RadioListTile(title: const Text('Canceled'), value: 'Canceled', groupValue: Status,
                       onChanged: (value){setState((){Status=value.toString();});}
                   ),
+                  const SizedBox(height: 50,),
                   Container(
                     child: ElevatedButton(
                       style: appButtonStyle(),
@@ -91,7 +92,7 @@ class _newTaskListState extends State<newTaskList> {
                         });
 
                       },
-                      child: const Text('Confirm'),
+                      child: successButton('Confirm', String),
                     ),
                   )
                 ],
