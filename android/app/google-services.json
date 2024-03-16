@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "568368059464",
+    "project_id": "practice-project-1-5d4c2",
+    "storage_bucket": "practice-project-1-5d4c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568368059464:android:a9cc66facb9060f8a7347d",
+        "android_client_info": {
+          "package_name": "com.example.counter_app_with_getx"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsG-BZIH3Pw68WAyJASf-9Sqrya0EVytQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
