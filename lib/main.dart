@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:counter_app_with_getx/match%20update.dart';
 import 'package:counter_app_with_getx/navigation.dart';
+import 'package:counter_app_with_getx/sign%20in.dart';
+import 'package:counter_app_with_getx/sign%20up.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import 'package:get/get.dart';
 import 'counter page.dart';
 import 'home screen.dart';
 import 'theming.dart';
+import 'firebase_notification_handler.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,6 +26,8 @@ Future<void> main() async {
         projectId: "practice-project-1-5d4c2",
     ),)
       : await Firebase.initializeApp();
+  await firebaseNotificationHanlder().initialization();
+  print(firebaseNotificationHanlder().getToken());
   runApp(MyCounterApp());
 }
 
@@ -37,7 +42,9 @@ class MyCounterApp extends StatelessWidget {
       themeMode: ThemeMode.system,
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => homeScreen(), transition: Transition.leftToRight),
+        GetPage(name: '/', page: () => signUpScreen(),),
+        GetPage(name: '/sign_in', page: ()=> signInScreen(),),
+        GetPage(name: '/home_screen', page: () => homeScreen(), transition: Transition.leftToRight),
         GetPage(name: '/navigation', page: () => navigation(), transition: Transition.rightToLeft),
         GetPage(name: '/counter_page', page: () => counter(), transition: Transition.rightToLeft),
         GetPage(name: '/match_update', page: () => matchUpdate(), transition: Transition.rightToLeft),
