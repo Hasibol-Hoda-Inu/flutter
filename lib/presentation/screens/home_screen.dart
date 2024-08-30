@@ -1,9 +1,5 @@
-import 'dart:ui';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/rendering.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -13,8 +9,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TextEditingController _textEditingController=TextEditingController();
-  final double _result=0;
+  final TextEditingController _firstNumTEController=TextEditingController();
+  final TextEditingController _secondNumTEController=TextEditingController();
+  double _result = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextField(
-                controller: _textEditingController,
+                controller: _firstNumTEController,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                   label: Text('First Number'),
@@ -45,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               const SizedBox(height: 16,),
               TextField(
-                controller: _textEditingController,
+                controller: _secondNumTEController,
                 keyboardType: TextInputType.number,
                 decoration: const InputDecoration(
                   label: Text('Second Number'),
@@ -56,11 +53,13 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 24,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceAround,
                 children: [
                   TextButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        _onTabAddButton();
+                      },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green
                       ),
@@ -71,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white
                   ),)),
                   TextButton(
-                      onPressed: (){},
+                      onPressed: _onTabRemoveButton,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green
                       ),
@@ -82,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white
                   ),)),
                   TextButton(
-                      onPressed: (){},
+                      onPressed: _onTabMultiplyButton,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green
                       ),
@@ -93,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white
                   ),)),
                   TextButton(
-                      onPressed: (){},
+                      onPressed: _onTabDivisionButton,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green
                       ),
@@ -106,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               const SizedBox(height: 32,),
-              Text('Result: $_result', style: const TextStyle(
+              Text('Result: ${_result.toStringAsFixed(2)}', style: const TextStyle(
                 fontSize: 18
               ),)
             ],
@@ -114,5 +113,40 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+  void _onTabAddButton(){
+    double firstNum=double.parse(_firstNumTEController.text)??0;
+    double secondNum=double.parse(_secondNumTEController.text)??0;
+    setState(() {
+      _result = firstNum+secondNum;
+    });
+  }
+  void _onTabRemoveButton(){
+    double firstNum=double.parse(_firstNumTEController.text)??0;
+    double secondNum=double.parse(_secondNumTEController.text)??0;
+    setState(() {
+      _result = firstNum-secondNum;
+    });
+  }
+  void _onTabMultiplyButton(){
+    double firstNum=double.parse(_firstNumTEController.text)??0;
+    double secondNum=double.parse(_secondNumTEController.text)??0;
+    setState(() {
+      _result = firstNum*secondNum;
+    });
+  }
+  void _onTabDivisionButton(){
+    double firstNum=double.parse(_firstNumTEController.text)??0;
+    double secondNum=double.parse(_secondNumTEController.text)??0;
+    setState(() {
+      _result = firstNum/secondNum;
+    });
+  }
+
+  @override
+  void dispose() {
+    _firstNumTEController.dispose();
+    _secondNumTEController.dispose();
+    super.dispose();
   }
 }
