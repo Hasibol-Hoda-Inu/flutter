@@ -11,7 +11,9 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _firstNumTEController=TextEditingController();
   final TextEditingController _secondNumTEController=TextEditingController();
+  final GlobalKey<FormState> _formKey=GlobalKey<FormState>();
   double _result = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,35 +27,62 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextField(
-                controller: _firstNumTEController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  label: Text('First Number'),
-                  hintText: 'First Number',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(6)),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextFormField(
+                  controller: _firstNumTEController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    label: Text('First Number'),
+                    hintText: 'First Number',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(6)),
+                    ),
+
                   ),
-                  
+                  validator: (String? value){
+                    if(value==null || value.isEmpty){
+                      return 'Enter a value';
+                    }
+                    return null;
+                  },
                 ),
-              ),
-              const SizedBox(height: 16,),
-              TextField(
-                controller: _secondNumTEController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  label: Text('Second Number'),
-                  hintText: 'Second Number',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(6))
-                  )
+                const SizedBox(height: 16,),
+                TextFormField(
+                  controller: _secondNumTEController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    label: Text('Second Number'),
+                    hintText: 'Second Number',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(6))
+                    )
+                  ),
+                  validator: (String?value){
+                    if(value==null || value.isEmpty){
+                      return 'Enter a value';
+                    }return null;
+                  },
                 ),
-              ),
-              const SizedBox(height: 24,),
-              ButtonBar(
+                const SizedBox(height: 24,),
+                _buildButtonBar(),
+                const SizedBox(height: 32,),
+                Text('Result: ${_result.toStringAsFixed(2)}', style: const TextStyle(
+                  fontSize: 18
+                ),)
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildButtonBar() {
+    return ButtonBar(
                 alignment: MainAxisAlignment.spaceAround,
                 children: [
                   TextButton(
@@ -103,45 +132,60 @@ class _HomeScreenState extends State<HomeScreen> {
                       color: Colors.white
                   ),)),
                 ],
-              ),
-              const SizedBox(height: 32,),
-              Text('Result: ${_result.toStringAsFixed(2)}', style: const TextStyle(
-                fontSize: 18
-              ),)
-            ],
-          ),
-        ),
-      ),
-    );
+              );
   }
   void _onTabAddButton(){
-    double firstNum=double.parse(_firstNumTEController.text)??0;
-    double secondNum=double.parse(_secondNumTEController.text)??0;
-    setState(() {
-      _result = firstNum+secondNum;
-    });
+   if(_formKey.currentState!.validate()){
+     double firstNum=double.tryParse(_firstNumTEController.text)??0;
+     double secondNum=double.tryParse(_secondNumTEController.text)??0;
+     _firstNumTEController.clear();
+     _secondNumTEController.clear();
+     setState(() {
+       _result = firstNum+secondNum;
+     });
+   }
   }
   void _onTabRemoveButton(){
-    double firstNum=double.parse(_firstNumTEController.text)??0;
-    double secondNum=double.parse(_secondNumTEController.text)??0;
-    setState(() {
-      _result = firstNum-secondNum;
-    });
+    if(_formKey.currentState!.validate()){
+      double firstNum=double.tryParse(_firstNumTEController.text)??0;
+      double secondNum=double.tryParse(_secondNumTEController.text)??0;
+      _firstNumTEController.clear();
+      _secondNumTEController.clear();
+      setState(() {
+        _result = firstNum-secondNum;
+      });
+    }
   }
   void _onTabMultiplyButton(){
-    double firstNum=double.parse(_firstNumTEController.text)??0;
-    double secondNum=double.parse(_secondNumTEController.text)??0;
-    setState(() {
-      _result = firstNum*secondNum;
-    });
+    if(_formKey.currentState!.validate()){
+      double firstNum=double.tryParse(_firstNumTEController.text)??0;
+      double secondNum=double.tryParse(_secondNumTEController.text)??0;
+      _firstNumTEController.clear();
+      _secondNumTEController.clear();
+      setState(() {
+        _result = firstNum*secondNum;
+      });
+    }
   }
   void _onTabDivisionButton(){
-    double firstNum=double.parse(_firstNumTEController.text)??0;
-    double secondNum=double.parse(_secondNumTEController.text)??0;
-    setState(() {
-      _result = firstNum/secondNum;
-    });
+    if(_formKey.currentState!.validate()){
+      double firstNum=double.tryParse(_firstNumTEController.text)??0;
+      double secondNum=double.tryParse(_secondNumTEController.text)??0;
+      _firstNumTEController.clear();
+      _secondNumTEController.clear();
+      setState(() {
+        _result = firstNum/secondNum;
+      });
+    }
   }
+  // bool _validateTextField(){
+  //   if(_firstNumTEController.text.isEmpty){
+  //     return false;
+  //   }
+  //   if(_secondNumTEController.text.isEmpty){
+  //     return false;
+  //   }return true;
+  // }
 
   @override
   void dispose() {
